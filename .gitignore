@@ -1,0 +1,9 @@
+# ROMs, partidas y datos extraídos de las ROMs: nunca se suben
+*.nds
+*.sav
+*.SaveRAM
+*.State
+*.pkl
+venv/
+__pycache__/
+dist/
