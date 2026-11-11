@@ -13120,7 +13120,7 @@ end)()
 			-- Rule 9: name where a Distortion World route was left, in three dimensions.
 			if pf.dw then
 				local mo = terrain.player_object(fs, {})
-				dbg(string.format("Distortion World route: off at (%d,%d,%d) state 0x%X motion %s, expected tile %d of %d",
+				dbg(string.format("Distortion World route: off at (%d,%d,%d) state 0x%X motion %s, expected tile %d de %d",
 					px, mo and s32(mo + 0x68) // 2 or -1, pz, u32(u32(fs + FS_AVATAR)) & 0x1F00,
 					tostring(terrain.motion(fs, {})), pf.idx, #pf.tiles))
 			end
@@ -14656,7 +14656,7 @@ end)()
 						local r, why2
 						if entry then r, why2 = pf_plan(fs, px, pz, entry, occ, {}) end
 						if r then pf = r; if r.segs[1] then say(r.segs[1]) end
-						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name .. " yet")
+						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name)
 						else say("No se puede llegar a " .. name .. " desde aquí") end
 					else eterna.reenter = true end
 				end
@@ -14674,7 +14674,7 @@ end)()
 						eterna.intent = nil
 						local name = intent.entry.label or intent.entry.name
 						if r then pf = r; say(r.segs[1] or "continúa")
-						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name .. " yet")
+						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name)
 						else say("No se puede llegar a " .. name .. " desde aquí") end
 					else eterna.reenter = true end
 				end
@@ -14693,7 +14693,7 @@ end)()
 						eterna.intent = nil
 						local name = intent.entry.label or intent.entry.name
 						if r then pf = r; say(r.segs[1] or "continúa")
-						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name .. " yet")
+						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name)
 						else say("No se puede llegar a " .. name .. " desde aquí") end
 					else eterna.reenter = true end
 				end
@@ -14712,7 +14712,7 @@ end)()
 						eterna.intent = nil
 						local name = intent.entry.label or intent.entry.name
 						if r then pf = r; say(r.segs[1] or "continúa")
-						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name .. " yet")
+						elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name)
 						else say("No se puede llegar a " .. name .. " desde aquí") end
 					else eterna.reenter = true end
 				end
@@ -14729,7 +14729,7 @@ end)()
 						eterna.intent = nil
 						local name = intent.entry.label or intent.entry.name
 						if r then pf = r; if r.segs[1] or not (r.kick or r.strength) then say(r.segs[1] or "continúa") end
-						elseif why == "limit" or why == "terrain" then say("Todavía no encuentro ruta hasta " .. name .. " yet")
+						elseif why == "limit" or why == "terrain" then say("Todavía no encuentro ruta hasta " .. name)
 						else say("No se puede llegar a " .. name .. " desde aquí") end
 					else eterna.reenter = true end
 				end
@@ -14746,7 +14746,7 @@ end)()
 						local r = pf_plan(fs,px,pz,intent.entry,occ,query)
 						eterna.intent = nil
 						if r then pf = r; say(r.segs[1] or "continúa")
-						else say("Todavía no encuentro ruta hasta " .. (intent.entry.label or intent.entry.name) .. " yet") end
+						else say("Todavía no encuentro ruta hasta " .. (intent.entry.label or intent.entry.name)) end
 					else eterna.reenter = true end
 				elseif state.state < intent.state then eterna.intent = nil end
 			end
@@ -14763,7 +14763,7 @@ end)()
 					local name = intent.entry.label or intent.entry.name
 					local r, why2 = pf_plan(fs, px, pz, intent.entry, occ, {})
 					if r then pf = r; say("Recalculando. " .. (r.segs[1] or ""))
-					elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name .. " yet")
+					elseif why2 == "limit" or why2 == "terrain" then say("Todavía no encuentro ruta hasta " .. name)
 					else say("No se puede llegar a " .. name .. " desde aquí") end
 				end
 			end
@@ -14931,7 +14931,7 @@ end)()
 					say("No se puede llegar a " .. (e.label or e.name) .. " desde aquí", true)
 				elseif not occ_ok then
 					-- Cannot see who is standing where: refuse rather than route through them.
-					say("Todavía no encuentro ruta hasta " .. (e.label or e.name) .. " yet", true)
+					say("Todavía no encuentro ruta hasta " .. (e.label or e.name), true)
 				else
 					local dwmap = terrain.dw.active(fs, cache)
 					local cands, certain = {}, true
@@ -14965,7 +14965,7 @@ end)()
 						elseif why == "limit" or why == "terrain" or not certain then
 							-- The search ran out of room, or a side could not be read. Both are
 							-- statements about US, and neither justifies one about the world.
-							say("Todavía no encuentro ruta hasta " .. (e.label or e.name) .. " yet", true)
+							say("Todavía no encuentro ruta hasta " .. (e.label or e.name), true)
 						else
 							say("No se puede llegar a " .. (e.label or e.name) .. " desde aquí", true)
 						end
@@ -32080,7 +32080,7 @@ end)()
 	-- rebuilt from the save exactly as journal_printer.c builds it, top to bottom.
 	-- Save entry 18 (SaveData_GetJournal 0202B628 `movs r1,#0x12`), ten 0x70-byte pages
 	-- (Journal_SaveSize 0202B604 = 0x460; page size 0x468 with SaveTableEntry_BodySize's padding).
-	PM.journal_words = {page = "Page %d of %d"}
+	PM.journal_words = {page = "Página %d de %d"}
 	function PM.journal_page()
 		local ui, state = PM.field_app(A.JournalController_Main, 81)
 		if not ui or state > 3 then return nil end

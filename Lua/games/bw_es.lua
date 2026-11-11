@@ -17477,7 +17477,7 @@ do
 				inram(fp2) and string.format("%08X", fp2) or "nil",
 				inram(fp2) and string.format("%08X", u32(fp2 + 0x08)) or "-",
 				inram(fp2) and string.format("%08X", u32(fp2 + 0x0C)) or "-")
-			out[#out+1] = string.format("RAILROUTE %q  pi=%d of %d  live=%s  space=%s/%s  onrail=%s  rtry=%s",
+			out[#out+1] = string.format("RAILROUTE %q  pi=%d de %d  live=%s  space=%s/%s  onrail=%s  rtry=%s",
 				tostring(pf.name), pf.pi, #pf.rpos,
 				l and string.format("line %d front %d side %d", l, f, sd) or "NOT LINE-FORM",
 				tostring(now), tostring(static),
