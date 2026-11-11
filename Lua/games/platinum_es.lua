@@ -6728,8 +6728,8 @@ end)()
 
 	-- The static half: warps and wall signs, from the map's own parsed event lists.
 	-- Artwork-only marks, verified against fldeff.narc models 0x74..0x7B.
-	local hearthome = {text={blue="Blue tile", red="Red door", symbols={
-		"Circle", "Square", "Triangle", "Sun", "Ring", "Crescent moon", "Star", "Heart"}}}
+	local hearthome = {text={blue="Baldosa azul", red="Puerta roja", symbols={
+		"Círculo", "Cuadrado", "Triángulo", "Sol", "Anillo", "Luna creciente", "Estrella", "Corazón"}}}
 	function hearthome.door(fs,x,z)
 		local id=map_id(fs)
 		local xs=id==89 and {4,8,12} or id==90 and {4,9,14,19,24}
@@ -6799,7 +6799,7 @@ end)()
 	-- gets entry+8; RemoveTireStack clears +0). Stacks at +4 x11 (GetTireStackAtPosition 0224B87C
 	-- `adds r0,#4`), bags at +0x10C x9 (GetPunchingBagAtPosition `movs r3,#0x43 ; lsls r3,#2`).
 	-- Persisted feature 4 with initialized +4 at Misc+700/+704 (Init 0224B770 `movs r1,#4`).
-	local veilstone = {text={bag="Punching bag"}}
+	local veilstone = {text={bag="Saco de boxeo"}}
 	do
 		local GYM_SIZE, STACKS, BAGS, STRIDE = 0x1E4, 0x04, 0x10C, 0x18
 		-- `detail` carries the values read, so the console line pins the hop; the repeat test keys on
@@ -11423,7 +11423,7 @@ end)()
 		-- slab... It appears to move if you step on a certain spot."); "Portal" is every portal
 		-- message's own word; up, down, "Passage" and "Event" are ours (the player's choices, 4 November).
 		-- No comma before the direction ("Rock slab down", "Surf 1 up"): the player's call, 4 November.
-		dw.text = { slab = "Rock slab", up = "up", down = "down", passage = "Passage", portal = "Portal", event = "Event" }
+		dw.text = { slab = "Losa de roca", up = "arriba", down = "abajo", passage = "Pasaje", portal = "Portal", event = "Evento" }
 		dw.grids = {}            -- cartridge platform grids by member: immutable, kept for the session
 
 		local function pkey(x, y, z) return (x * 1024 + y) * 1024 + z end
