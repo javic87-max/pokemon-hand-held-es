@@ -37768,22 +37768,5 @@ while true do
 	-- The core reads input after this whole iteration, so the last write of the frame is what it sees.
 	touch.step()
 
-	-- ES-DIAG (temporal): localiza los tirones de sonido. "lua" es lo que tarda este bucle; "fotograma" incluye
-	-- la emulacion y al propio BizHawk. Solo escribe en la consola. Borrar este bloque cuando se resuelva.
-	do
-		ES_DIAG = ES_DIAG or { t0 = os.clock(), prev = os.clock(), n = 0, last = 0 }
-		local D, t = ES_DIAG, os.clock()
-		local lua_ms, frame_ms = (t - D.t0) * 1000, (D.t0 - D.prev) * 1000
-		D.n = D.n + 1
-		if (lua_ms > 15 or frame_ms > 70) and D.n > 120 and t - D.last > 0.25 then
-			D.last = t
-			console.writeline(string.format("[lento] lua=%.0f ms fotograma=%.0f ms memoria=%.0f KB pantalla=%s",
-				lua_ms, frame_ms, collectgarbage("count"), active and active.name or "ninguna"))
-		end
-		if D.n % 3600 == 0 then
-			console.writeline(string.format("[memoria] %.0f KB tras %d fotogramas", collectgarbage("count"), D.n))
-		end
-		emu.frameadvance()
-		D.prev, D.t0 = D.t0, os.clock()
-	end
+	emu.frameadvance()
 end
